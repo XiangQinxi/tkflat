@@ -21,7 +21,7 @@ class Button(Visual):
         self._command = command
         self.bind("<<Click>>", self._on_click)
 
-        self._style = "Button"
+        self._widget_name = "Button"
 
         if font is None:
             font = default_font()

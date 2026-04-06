@@ -17,7 +17,7 @@ class Label(Visual):
     ):
         super().__init__(*args, **kwargs)
 
-        self._style = "Label"
+        self._widget_name = "Label"
 
         if font is None:
             font = default_font()

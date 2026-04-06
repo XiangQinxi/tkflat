@@ -11,7 +11,7 @@ class Text(Visual):
     def __init__(self, *args, width=120, height=68, font=None, **kwargs):
         super().__init__(*args, width=width, height=height, **kwargs)
 
-        self._style = "Text"
+        self._widget_name = "Text"
 
         if font is None:
             font = default_font()

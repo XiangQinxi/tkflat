@@ -1,52 +1,63 @@
 name: dark
 
-Window:
-  bg: '#171717'
+styles:
+  bg: "#0a0a0a"
+  fg: "#fafafa"
+  frame: "#171717"
+  second_fg: "#c2c2c2"
+  primary: "#e5e5e5"
+  second: "#212121"
+  muted: "#282828"
+  accent: "#262626"
+  border: "#3a3a3a"
 
-Button:
-  bg: '#212121'
-  border: '#3a3a3a'
-  border_width: 1
-  text: '#e3e5e5'
+widgets:
+  Window:
+    bg: "@bg"
 
-  hover:
-    bg: '#282828'
-    border: '#3a3a3a'
-  press:
-    bg: '#282828'
-    border: '#3a3a3a'
-    text: '#c4c4c4'
+  Button:
+    bg: "@second"
+    border: "@border"
+    border_width: 1
+    text: "@fg"
 
-Entry:
-  bg: '#212121'
-  border: '#3a3a3a'
-  border_width: 1
-  text: '#e3e5e5'
+    hover:
+      bg: '@muted'
+      border_width: 2
+    press:
+      bg: '@muted'
+      text: '@second_fg'
+      border_width: 2
 
-  hover:
-    bg: '#282828'
-    border: '#3a3a3a'
-  focus:
-    bg: '#282828'
-    border: '#3a3a3a'
-    text: '#ffffff'
-    border_width: 3
+  Entry:
+    bg: "@second"
+    border: "@border"
+    border_width: 1
+    text: "@fg"
 
-Text:
-  bg: '#212121'
-  border: '#3a3a3a'
-  border_width: 1
-  text: '#e3e5e5'
+    hover:
+      bg: "@muted"
+      border: "@border"
+    focus:
+      bg: "@muted"
+      border: "@border"
+      text: "@fg"
+      border_width: 3
 
-  hover:
-    bg: '#282828'
-    border: '#3a3a3a'
-  focus:
-    bg: '#282828'
-    border: '#3a3a3a'
-    text: '#ffffff'
-    border_width: 3
+  Text:
+    bg: "@second"
+    border: "@border"
+    border_width: 1
+    text: "@fg"
 
-Label:
-  text: '#e3e5e5'
+    hover:
+      bg: "@muted"
+      border: "@border"
+    focus:
+      bg: "@muted"
+      border: "@border"
+      text: "@fg"
+      border_width: 3
 
+  Label:
+    text: "@fg"

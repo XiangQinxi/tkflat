@@ -27,20 +27,26 @@ class Theme:
                 return self.load_yaml(data)
         return None
 
+    def load(self, data):
+        if "copy" in data:
+            copy = self.themes[data["copy"]]
+            copy.update(data)
+        else:
+            copy = data
+        self.themes[data["name"]] = copy
+
     def load_toml(self, data):
         import toml
-        import yaml
 
         data = toml.loads(data)
-        print(yaml.safe_dump(data, default_flow_style=False))
-        self.themes[data["name"]] = data
+        self.load(data)
         return data["name"]
 
     def load_yaml(self, data):
         import yaml
 
         data = yaml.safe_load(data)
-        self.themes[data["name"]] = data
+        self.load(data)
         return data["name"]
 
     def get_using_theme(self):

@@ -9,7 +9,7 @@ class Entry(Visual):
     def __init__(self, *args, font=None, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self._style = "Entry"
+        self._widget_name = "Entry"
 
         if font is None:
             font = default_font()
