@@ -1,9 +1,15 @@
 from tkinter.font import Font
 
+_font = None
+
 
 def default_font():
-    return Font(
-        family="system",
-        size=11,
-        weight="bold",
-    )
+    global _font
+    if _font is None:
+        _font = Font(
+            name="flatDefaultFont",
+            family="segoe ui",
+            size=10,
+            weight="normal",
+        )
+    return _font

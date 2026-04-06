@@ -47,33 +47,35 @@ class Visual(Canvas):
             if style_name not in self._theme["widgets"][self._widget_name][self._state]:
                 return self._theme["widgets"][self._widget_name][style_name]
             else:
-                return self._theme["widgets"][self._widget_name][self._state][style_name]
+                return self._theme["widgets"][self._widget_name][self._state][
+                    style_name
+                ]
         # Rest style
         return self._theme["widgets"][self._widget_name][style_name]
 
-    def style(self, style_name: str) -> str:
+    def style(self, style_name: str) -> str | int:
         _s = self._original_style(style_name)
         if isinstance(_s, str):
             if _s.startswith("@"):
                 return self._theme["styles"][_s[1:]]
         return _s
 
-    def _on_press(self, event: Event):
+    def _on_press(self, event: Event = None):  # NOQA
         self._press = True
         self.focus_set()
         self.update_state()
 
-    def _on_release(self, event: Event):
+    def _on_release(self, event: Event = None):  # NOQA
         self._press = False
         self.update_state()
         if self._enter:
             self.event_generate("<<Click>>")
 
-    def _on_hover(self, event: Event):
+    def _on_hover(self, event: Event = None):  # NOQA
         self._enter = True
         self.update_state()
 
-    def _on_leave(self, event: Event):
+    def _on_leave(self, event: Event = None):  # NOQA
         self._enter = False
         self.update_state()
 

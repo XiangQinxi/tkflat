@@ -41,18 +41,19 @@ class Button(Visual):
 
         self.draw()
 
-    def _on_click(self, event):
+    def _on_click(self, event=None):  # NOQA
         if self._command:
             self._command()
 
     def draw(self):
-        # self.coords(self._border, 0, 0, self.winfo_width(), self.winfo_height())
         self.coords(self._text, self.winfo_width() / 2, self.winfo_height() / 2)
+        size = self.bbox(self._text)
         self.configure(
             background=self.style("bg"),  # Background color
             highlightbackground=self.style("border"),  # Border color
             # borderwidth=self._theme[self._style][self._state]["border_width"],  # Border width
             highlightthickness=self.style("border_width"),
+            width=size[2] - size[0],
         )
         self.itemconfig(
             self._text,

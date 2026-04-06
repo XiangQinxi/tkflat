@@ -1,10 +1,8 @@
 import tkinter
 from tkinter import Event
-from tkinter.font import Font
-from typing import Literal
 
-from .visual import Visual
 from .font import default_font
+from .visual import Visual
 
 
 class Text(Visual):
@@ -34,11 +32,11 @@ class Text(Visual):
 
         self.draw()
 
-    def _on_focus_in(self, event: Event):
+    def _on_focus_in(self, event: Event = None):  # NOQA
         self._focused = True
         self.update_state()
 
-    def _on_focus_out(self, event: Event):
+    def _on_focus_out(self, event: Event = None):  # NOQA
         self._focused = False
         self.update_state()
 

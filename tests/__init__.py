@@ -1,11 +1,13 @@
-from tkinter import *
+from tkinter import *  # NOQA
 
 from tkflat import *
 
 root = Tk()
 
-Label(root, text="Hello, World!").pack()
-Button(root, text="Click me").pack(padx=10, pady=10)
+Label(root, text="tkflat.Label").pack()
+Button(root, text="tkflat.Button", command=lambda: print("Button is clicked")).pack(
+    padx=10, pady=10
+)
 Entry(root).pack(padx=10, pady=10)
 Text(root).pack(padx=10, pady=10)
 
