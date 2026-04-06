@@ -2,6 +2,8 @@ from tkinter import *  # NOQA
 
 from tkflat import *
 
+Theme.using_theme = "dark"
+
 root = Tk()
 
 Label(root, text="tkflat.Label").pack()

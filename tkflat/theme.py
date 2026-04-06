@@ -3,7 +3,6 @@ import pathlib
 
 
 class Theme:
-
     themes = {}
     using_theme = "dark"
 
@@ -29,7 +28,7 @@ class Theme:
 
     def load(self, data):
         if "copy" in data:
-            copy = self.themes[data["copy"]]
+            copy = dict(self.themes[data["copy"]])
             copy.update(data)
         else:
             copy = data
