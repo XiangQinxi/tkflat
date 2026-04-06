@@ -1,15 +1,17 @@
 import tkinter
 from tkinter import Event
+from tkinter.font import Font
+from typing import Literal
 
 from .visual import Visual
 from .font import default_font
 
 
-class Entry(Visual):
-    def __init__(self, *args, font=None, **kwargs):
-        super().__init__(*args, **kwargs)
+class Text(Visual):
+    def __init__(self, *args, width=120, height=68, font=None, **kwargs):
+        super().__init__(*args, width=width, height=height, **kwargs)
 
-        self._style = "Entry"
+        self._style = "Text"
 
         if font is None:
             font = default_font()
@@ -18,17 +20,17 @@ class Entry(Visual):
             "font": font,
         }
 
-        self.entry = tkinter.Entry(self, width=0, **kwargs)
-        self._entry_input_event = None
-        self._entry = self.create_window(0, 0, window=self.entry, anchor="w")
+        self.text = tkinter.Text(self, width=0, **kwargs)
+        self._text_input_event = None
+        self._text = self.create_window(0, 0, window=self.text, anchor="nw")
 
         self.bind("<FocusIn>", self._on_focus_in)
-        self.entry.bind("<FocusIn>", self._on_focus_in)
-        self.entry.bind("<FocusOut>", self._on_focus_out)
-        self.entry.bind("<Key>", lambda e: self.draw())
-        self.entry.bind("<Configure>", self._on_configure)
-        self.entry.bind("<Enter>", self._on_hover)
-        self.entry.bind("<Leave>", self._on_leave)
+        self.text.bind("<FocusIn>", self._on_focus_in)
+        self.text.bind("<FocusOut>", self._on_focus_out)
+        self.text.bind("<Key>", lambda e: self.draw())
+        self.text.bind("<Configure>", self._on_configure)
+        self.text.bind("<Enter>", self._on_hover)
+        self.text.bind("<Leave>", self._on_leave)
 
         self.draw()
 
@@ -51,21 +53,24 @@ class Entry(Visual):
         self.draw()
 
     def focus_set(self):
-        self.entry.focus_set()
+        self.text.focus_set()
 
     def draw(self):
         # self.coords(self._border, 0, 0, self.winfo_width(), self.winfo_height())
         border_width = self.style("border_width")
-        self.coords(self._entry, border_width, self.winfo_height() / 2)
+        self.coords(self._text, border_width, border_width)
         self.configure(
             background=self.style("bg"),  # bg color
             highlightbackground=self.style("border"),  # Border color
             # borderwidth=self._theme[self._style][self._state]["border_width"],  # Border width
             highlightthickness=border_width,
-            width=self.entry.winfo_width() + border_width,
         )
-        self.itemconfigure(self._entry, height=self.winfo_height() - border_width * 2)
-        self.entry.configure(
+        self.itemconfigure(
+            self._text,
+            width=self.winfo_width() - border_width * 2,
+            height=self.winfo_height() - border_width * 2,
+        )
+        self.text.configure(
             background=self.style("bg"),
             borderwidth=0,
             highlightthickness=0,
@@ -74,4 +79,4 @@ class Entry(Visual):
             insertborderwidth=1,
             font=self.cget("font"),
         )
-        # self.itemconfigure(self._entry, width=0)
+        # self.itemconfigure(self._text, width=0)

@@ -30,6 +30,23 @@ Entry:
     bg: '#282828'
     border: '#3a3a3a'
     text: '#ffffff'
+    border_width: 3
+
+Text:
+  bg: '#212121'
+  border: '#3a3a3a'
+  border_width: 1
+  text: '#e3e5e5'
+
+  hover:
+    bg: '#282828'
+    border: '#3a3a3a'
+  focus:
+    bg: '#282828'
+    border: '#3a3a3a'
+    text: '#ffffff'
+    border_width: 3
 
 Label:
   text: '#e3e5e5'
+

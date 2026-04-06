@@ -5,7 +5,7 @@ import pathlib
 class Theme:
 
     themes = {}
-    using_theme = "light"
+    using_theme = "dark"
 
     INTERNAL_THEME_DIR = pathlib.Path(__file__).parent / "themes"
 
@@ -30,6 +30,7 @@ class Theme:
     def load_toml(self, data):
         import toml
         import yaml
+
         data = toml.loads(data)
         print(yaml.safe_dump(data, default_flow_style=False))
         self.themes[data["name"]] = data

@@ -1,6 +1,6 @@
-from tkinter.font import Font
 from typing import Literal
 
+from .font import default_font
 from .visual import Visual
 
 
@@ -14,7 +14,7 @@ class Button(Visual):
         ] = "center",
         font=None,
         command=None,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(*args, **kwargs)
 
@@ -24,15 +24,12 @@ class Button(Visual):
         self._style = "Button"
 
         if font is None:
-            font = Font(
-                family="system",
-                size=11,
-                weight="bold",
-            )
+            font = default_font()
 
         self._visual_attrs = {
             "text": text,
             "anchor": anchor,
+            "font": font,
         }
 
         # self._border = self.create_rectangle(
@@ -62,4 +59,5 @@ class Button(Visual):
             text=self.cget("text"),
             anchor=self.cget("anchor"),
             fill=self.style("text"),
+            font=self.cget("font"),
         )
