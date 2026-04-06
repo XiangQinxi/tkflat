@@ -6,11 +6,15 @@ Theme.using_theme = "dark"
 
 root = Tk()
 
-Label(root, text="tkflat.Label").pack()
-Button(root, text="tkflat.Button", command=lambda: print("Button is clicked")).pack(
+frame = Frame(root)
+
+Label(frame, text="tkflat.Label").pack()
+Button(frame, text="tkflat.Button", command=lambda: print("Button is clicked")).pack(
     padx=10, pady=10
 )
-Entry(root).pack(padx=10, pady=10)
-Text(root).pack(padx=10, pady=10)
+Entry(frame).pack(padx=10, pady=10)
+Text(frame).pack(padx=10, pady=10)
+
+frame.pack(fill="both", expand=True, padx=10, pady=10)
 
 root.mainloop()

@@ -44,6 +44,11 @@ widgets:
       text: "@fg"
       border_width: 3
 
+  Frame:
+    bg: "@frame"
+    border: "@border"
+    border_width: 1
+
   Text:
     bg: "@second"
     border: "@border"

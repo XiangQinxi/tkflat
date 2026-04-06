@@ -1,15 +1,14 @@
 from tkinter import Canvas, Event
 
-from .theme import using_theme
+from .styled import Styled
 
 
-class Visual(Canvas):
+class Visual(Canvas, Styled):
     def __init__(self, *args, width=66, height=34, **kwargs):
-        super().__init__(*args, width=width, height=height, **kwargs)
+        Canvas.__init__(self, *args, width=width, height=height, **kwargs)
+        Styled.__init__(self)
 
-        self._theme = using_theme
         self._widget_name = "Visual"
-        self._state = None
         self.__last_size = (0, 0)
         self._enter = False
         self._press = False
@@ -40,25 +39,6 @@ class Visual(Canvas):
         else:
             self._state = None
         self.draw()
-
-    def _original_style(self, style_name: str) -> str:
-        # Custom style
-        if self._state and self._state in self._theme["widgets"][self._widget_name]:
-            if style_name not in self._theme["widgets"][self._widget_name][self._state]:
-                return self._theme["widgets"][self._widget_name][style_name]
-            else:
-                return self._theme["widgets"][self._widget_name][self._state][
-                    style_name
-                ]
-        # Rest style
-        return self._theme["widgets"][self._widget_name][style_name]
-
-    def style(self, style_name: str) -> str | int:
-        _s = self._original_style(style_name)
-        if isinstance(_s, str):
-            if _s.startswith("@"):
-                return self._theme["styles"][_s[1:]]
-        return _s
 
     def _on_press(self, event: Event = None):  # NOQA
         self._press = True

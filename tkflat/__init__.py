@@ -1,5 +1,6 @@
 from .button import Button
 from .entry import Entry
+from .frame import Frame
 from .label import Label
 from .text import Text
 from .theme import Theme, using_theme

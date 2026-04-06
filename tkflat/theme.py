@@ -51,5 +51,26 @@ class Theme:
     def get_using_theme(self):
         return self.themes[self.using_theme]
 
+    def _original_style(self, widget_name, state, style_name: str) -> str:
+        # Custom style
+        theme = self.get_using_theme()
+        if state and state in theme["widgets"][widget_name]:
+            if style_name not in theme["widgets"][widget_name][state]:
+                return theme["widgets"][widget_name][style_name]
+            else:
+                return theme["widgets"][widget_name][state][
+                    style_name
+                ]
+        # Rest style
+        return theme["widgets"][widget_name][style_name]
+
+    def style(self, widget_name, state, style_name: str) -> str | int:
+        _s = self._original_style(widget_name, state, style_name)
+        if isinstance(_s, str):
+            if _s.startswith("@"):
+                return self.get_using_theme()["styles"][_s[1:]]
+        return _s
+
+
 
 using_theme = Theme().get_using_theme()

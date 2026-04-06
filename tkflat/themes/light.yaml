@@ -4,8 +4,8 @@ copy: dark
 styles:
   bg: "#f5f5f5"
   fg: "#0a0a0a"
-  second_fg: "#171717"
   frame: "#ffffff"
+  second_fg: "#171717"
   primary: "#171717"
   second: "#ffffff"
   muted: "#f5f5f5"

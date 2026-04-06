@@ -54,13 +54,11 @@ class Text(Visual):
         self.text.focus_set()
 
     def draw(self):
-        # self.coords(self._border, 0, 0, self.winfo_width(), self.winfo_height())
         border_width = self.style("border_width")
         self.coords(self._text, border_width, border_width)
         self.configure(
             background=self.style("bg"),  # bg color
             highlightbackground=self.style("border"),  # Border color
-            # borderwidth=self._theme[self._style][self._state]["border_width"],  # Border width
             highlightthickness=border_width,
         )
         self.itemconfigure(
@@ -77,4 +75,3 @@ class Text(Visual):
             insertborderwidth=1,
             font=self.cget("font"),
         )
-        # self.itemconfigure(self._text, width=0)

@@ -1,12 +1,12 @@
 import tkinter
+from .styled import Styled
 
-from .theme import using_theme
 
-
-class Tk(tkinter.Tk):
+class Tk(tkinter.Tk, Styled):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._widget_name = "Window"
-        self._theme = using_theme
+        tkinter.Tk.__init__(self, *args, **kwargs)
+        Styled.__init__(self)
 
-        self.configure(background=using_theme["styles"]["bg"])
+        self._widget_name = "Window"
+
+        self.configure(background=self.style("bg"))

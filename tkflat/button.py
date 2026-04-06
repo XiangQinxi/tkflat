@@ -51,7 +51,6 @@ class Button(Visual):
         self.configure(
             background=self.style("bg"),  # Background color
             highlightbackground=self.style("border"),  # Border color
-            # borderwidth=self._theme[self._style][self._state]["border_width"],  # Border width
             highlightthickness=self.style("border_width"),
             width=size[2] - size[0],
         )

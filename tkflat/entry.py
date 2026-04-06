@@ -60,7 +60,6 @@ class Entry(Visual):
         self.configure(
             background=self.style("bg"),  # bg color
             highlightbackground=self.style("border"),  # Border color
-            # borderwidth=self._theme[self._style][self._state]["border_width"],  # Border width
             highlightthickness=border_width,
             width=self.entry.winfo_width() + border_width,
         )
