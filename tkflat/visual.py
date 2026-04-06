@@ -1,0 +1,94 @@
+from tkinter import Canvas, Event
+
+from .theme import using_theme
+
+
+class Visual(Canvas):
+    def __init__(self, *args, width=66, height=34, **kwargs):
+        super().__init__(*args, width=width, height=height, **kwargs)
+
+        self._theme = using_theme
+        self._style = "Visual"
+        self._state = None
+        self.__last_size = (0, 0)
+        self._enter = False
+        self._press = False
+        self._focused = False
+        self.bind("<Configure>", self._on_configure)
+        self.bind("<Enter>", self._on_hover)
+        self.bind("<Leave>", self._on_leave)
+        self.bind("<Button>", self._on_press)
+        self.bind("<ButtonRelease>", self._on_release)
+
+        self._visual_attrs = {}
+
+    @property
+    def transparent(self):
+        try:
+            return self.master.cget("background")
+        except AttributeError:
+            if hasattr(self.master, "style"):
+                return self.master.style("background")
+        return False
+
+    def update_state(self):
+        if self._enter:
+            if self._press:
+                self._state = "press"
+            else:
+                self._state = "hover"
+        else:
+            self._state = None
+        self.draw()
+
+    def style(self, style_name: str):
+        # Custom style
+        if self._state and self._state in self._theme[self._style]:
+            if style_name not in self._theme[self._style][self._state]:
+                return self._theme[self._style][style_name]
+            else:
+                return self._theme[self._style][self._state][style_name]
+        # Rest style
+        return self._theme[self._style][style_name]
+
+    def _on_press(self, event: Event):
+        self._press = True
+        self.focus_set()
+        self.update_state()
+
+    def _on_release(self, event: Event):
+        self._press = False
+        self.update_state()
+        if self._enter:
+            self.event_generate("<<Click>>")
+
+    def _on_hover(self, event: Event):
+        self._enter = True
+        self.update_state()
+
+    def _on_leave(self, event: Event):
+        self._enter = False
+        self.update_state()
+
+    def _on_configure(self, event: Event):
+        w, h = event.width, event.height
+        if (w, h) != self.__last_size:
+            self.__last_size = (w, h)
+            self.draw()
+
+    def draw(self):
+        pass
+
+    # region Configure / Cget
+    def configure(self, **kwargs):
+        for k, v in kwargs.items():
+            if k in self._visual_attrs:
+                self._visual_attrs[k] = v
+                self.draw()
+
+        return super().configure(**kwargs)
+
+    def cget(self, key):
+        if key in self._visual_attrs:
+            return self._visual_attrs[key]
+        return super().cget(key)
